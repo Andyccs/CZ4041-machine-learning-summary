@@ -11,3 +11,6 @@ clean-pdf:
 	rm main.pdf
 
 clean-all: clean clean-pdf
+
+watch:
+	watch -p "*.tex" -c "make"

@@ -1,26 +1,34 @@
 \chapter{Decision Tree}
 
+\begin{multicols}{2}
 \section{Hunt's Algorithm}
 
-Hunt's algorithm grows a decision tree in a recursive fashion by partitioning the training records into successively purer subsets. Let $D_t$ be the set of training records that reach a node $t$:
+\noindent Hunt's algorithm grows a decision tree in a recursive fashion by partitioning the training records into successively purer subsets. Let $D_t$ be the set of training records that reach a node $t$:
 
 \begin{itemize}
-\item If $D_t$ contains records that belong the same class $y_t$, then $t$ is a leaf node labeled as $y_t$
-\item If $D_t$ is an empty set, then t is a leaf node labeled by the default class
-\item If $D_t$ contains records that belong to more than one class, use an attribute test to split the data into smaller subsets.
+    \item If $D_t$ contains records that belong the same class $y_t$, then $t$ is a leaf node labeled as $y_t$
+    \item If $D_t$ is an empty set, then t is a leaf node labeled by the default class
+    \item If $D_t$ contains records that belong to more than one class, use an \textit{attribute test} to split the data into smaller subsets.
 \end{itemize}
 
-\section{Measure of Node Impurity: Entrophy}
+\noindent We use greedy strategy to split the data based on an attribute test that optimizes certain criterion. 
+
+\section{Determine the Best Split}
+
+\noindent Greedy approach: Nodes with homogeneous class distribution are preferred
+
+\noindent Measure of node impurity, Entrophy:
 
 $$Entrophy(t)=-\sum P(j \mid t) log_2 P(j \mid t)$$ 
 
-\noindent Maximum value: $log_{2} n_{c}$
+\noindent Maximum value: $log_{2} K$, where $K$ is the total number of all possible values of Y. This happens when records are equally distributed among all classes, implying least information. 
 
-\noindent Minimum value: 0
+\noindent Minimum value: 0, when all records belong to one class, implying most information. \\
+
+\noindent The information gain by splitting a parent node into child nodes are:
 
 $$GAIN_{split}=Entrophy(p)-\sum_{i=1}^{k} \frac{n_i}{n}Entrophy(i)$$
-\noindent
-Disadvantage: Tends to prefer splits that result in large number of partitions, each being small but pure. \\
+\noindent We choose the split that give us the most information gain. Disadvantage: Tends to prefer splits that result in large number of partitions, each being small but pure. \\
 
 \noindent Introduce Gain Ratio: 
 
@@ -28,3 +36,15 @@ $$GainRATIO_{split}=\frac{GAIN_{split}}{SplitINFO}$$
 
 $$SplitINFO=-\sum_{i=1}^{k} \frac{n_i}{n}log_2 \frac{n_i}{n}$$ \\
 
+\noindent In gain ratio, we adjust information gain by the entropy of partitioning (SplitINFO). Higher entropy partitionaing (large number of small partitions is penalized). 
+
+\section{Stopping Criteria for Tree Induction}
+
+Stop expanding a node when:
+\begin{itemize}
+    \item all the records belong to the same class
+    \item all the recrods have similar attribute values
+    \item use early termination
+\end{itemize}
+
+\end{multicols}
