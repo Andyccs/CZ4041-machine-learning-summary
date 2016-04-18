@@ -5,23 +5,19 @@
 \section{Integration Functions}
 
 \noindent In perceptron, we use a simple summation for integration function:
-
 $$u_j = \sum_{i=1}^I w_{ji}x_i - \theta_j$$
 
 \noindent where $w_ji$ is read as the weight from $i$-th input to $j$-th neuron. \\
 
 \noindent Quadratic integration function:
-
 $$u_j = \sum_{i=1}^I w_{ji}x_i^2 - \theta_j$$
 
 \noindent Spherical integration function:
-
 $$u_j = \sum_{i=1}^I ( x_i - w_{ji})^2 - \theta_j$$
 
 \section{Activation Functions}
 
 \noindent We have seen the hard-limit / threshold activation function in perceptron:
-
 $$
 f(u) = 
 \begin{cases}
@@ -31,11 +27,9 @@ f(u) =
 $$
 
 \noindent We also seen the linear activation function in perceptron:
-
 $$f(u) = u$$
 
 \noindent Unipolar sigmoid acivation function:
-
 $$f(u) = \frac{1}{1+e^{-\lambda u}}$$
 
 \noindent We get sigmoid function when $\lambda=1$
