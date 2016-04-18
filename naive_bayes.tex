@@ -91,7 +91,7 @@ $$
 
 \noindent The expected risk for taking action $a_{i}$:
 
-$$R(a_{i} | X) = \sum^{K}_{k=1} P(Y_{k} | X)$$
+$$R(a_{i} | X) = \sum^{K}_{k=1} \lambda_{ik} P(Y_{k} | X)$$
 
 \noindent We choose the action $a_{i}$ with minimum risk:
 
@@ -111,16 +111,20 @@ $$
 
 \noindent In 0/1 loss, the choice of action is consitent with our choice before we define losses and risks
 
-\begin{equation}
+\begin{equation*}
 \begin{split}
-    R(a_i | X) &= \sum_{k=1}^K \lambda_{ik} P(Y_k|X) \\
-    &= \sum_{k \ne i} P(Y_k | X) \\
-    &= 1-P(Y_i|X)
+    R(a_i | X) &= \sum_{k=1}^K \lambda_{ik} P(Y=y_k|X) \\
+    &= \sum_{k \ne i} P(Y=y_k | X) \\
+    &= 1-P(Y=y_i|X) \\
 \end{split}
-\end{equation}
+\end{equation*}
+
+$$R(a_i|X) = \!\min_{k} R(a_k|X) = \!\max_i P(Y=y_i|X)$$
 
 \subsection{Reject or Doubt}
+In some applications, wrong decisions may have very high cost. Manual decision is required if the automatic system has low certainty of its decision For example, to use an optical digit recognizer to read postal codes on envelopes, wrongly recognizing the code causes the envelope to be sent to a wrong destination.
 
+\subsection{Reject or Doubt Formulation}
 \noindent The new loss function, where $0 < r < 1$ is the loss incurred for choosing the reject action:
 
 $$
@@ -132,38 +136,29 @@ r & i = K + 1 \\
 \end{cases}
 $$
 
-\noindent The number of actions is equal to 1 + the number of class, $K$. 
+\noindent The number of actions is equal to 1 + the number of class, $K$. $a_{i}$ is the action of predicting $Y_{i}$. The action $a_{K+1}$ is reject action. 
 
-\noindent $a_{i}$ is the action of predicting $Y_{i}$.
+\noindent The expected risk of taking the action reject is:
 
-\noindent The action $a_{K+1}$ is reject action. 
+$$R(a_{K+1}|X) = \sum_{k=1}^K \lambda_{[K+1][k]} P(Y=y_k|X) = \lambda_{[K+1][k]} = r$$
 
 \section{Optimal Decision Rule}
 
-\noindent If we consider risk in our decision:
+\subsection{Decision Rule 1}
 
-\begin{itemize}
-    \item choose $Y_{i}$ if 
-    \begin{itemize}
-        \item $R(a_{i}|X) < R(a_{k}|X)$ for all $k \le K$ and $k \ne i$ and 
-        \item $R(a_{i}|X) < R(a_{K+1}|X)$
-    \end{itemize}
-    \item choose reject if
-    \begin{itemize}
-        \item $R(a_{K+1}|X) < R(a_{i}|X), i=1...K$
-    \end{itemize}
-\end{itemize}
+\noindent Choose $Y_{i}$ if 
+$$R(a_{i}|X) < R(a_{k}|X), \forall k|k \ne i$$
+$$R(a_{i}|X) < R(a_{K+1}|X)$$
 
-\noindent The above decision rule is the same as
+\noindent Choose reject if
+$$R(a_{K+1}|X) < R(a_{i}|X), i=1...K$$
 
-\begin{itemize}
-    \item choose $Y_{i}$ if 
-    \begin{itemize}
-        \item $P(Y_{i}|X) > P(Y_{k}|X)$ for all $k \le K$ and $k \ne i$ and 
-        \item $P(Y_{i}|X) > 1 - \lambda$
-    \end{itemize}
-    \item choose reject otherwise
-\end{itemize}
+\subsection{Decision Rule 2}
+
+\noindent Similary, choose $Y_{i}$ if 
+$$P(Y_{i}|X) > P(Y_{k}|X), \forall k|k \ne i$$
+$$P(Y_{i}|X) > 1 - \lambda_{[K+1][k]}$$
+\noindent Choose reject otherwise
 
 \section{Naive Bayes Classifier}
 
