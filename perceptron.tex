@@ -1,0 +1,68 @@
+\chapter{Neural Networks: Perceptron}
+\begin{multicols}{2}
+
+\section{Perceptron Model}
+
+\noindent Net synaptic inputs, for $I$ number of inputs:
+
+$$u = \sum_{i=1}^I w_i x_i - \theta$$
+$$u = \sum_{i=0}^I w_i x_i$$
+$$u = \mathbf{w} \cdot \mathbf{x}$$
+$$u = \mathbf{w}^T \mathbf{x}$$
+
+\noindent where $w_0=-\theta$ and $x_0=1$ \\
+
+\noindent The total synaptic inputs will go throught activation function $f$ to product an output $y$ 
+
+$$y=f(u)$$
+
+\noindent One possible of function $f$ is the hard-limiter activation function:
+
+$$
+f(u) = 
+\begin{cases}
+1 & u \ge 0\\
+-1 & u < 0
+\end{cases}
+$$
+
+\section{Perceptron Learning}
+
+During training, the weight parameters $\mathbf{w}$ are adjusted until the outputs of the perceptron become consistent with the true outputs of training data. The weight parameters $\mathbf{w}$ are updated iteratively using gradient descent. 
+
+$$\mathbf{\triangle w} = - \lambda \frac{\partial E(\mathbf{w})}{\partial \mathbf{w}}$$
+
+\begin{equation*}
+\begin{split}
+\mathbf{w^{new}} &= \mathbf{w^{old} + \triangle w } \\
+&= \mathbf{w^{old}} - \lambda \frac{\partial E(\mathbf{w})}{\partial w}
+\end{split}
+\end{equation*}
+
+\noindent consider the loss function for each training example as:
+$$E(\mathbf{w})=\frac{1}{2}(y_i-h_i)^{2}$$
+
+\noindent The gradient of error function:
+\begin{equation*}
+\begin{split}
+\frac{\partial E(\mathbf{w})}{\partial \mathbf{w}} &= \frac{1}{2} \frac{\partial (y_i-h_i)^{2}}{\partial \mathbf{w}} \\
+&= - (y_i-h_i) \frac{\partial f(u)}{\partial \mathbf{w}} \\
+&= - (y_i-h_i) \frac{\partial f(u)}{\partial u} \frac{\partial u}{\partial \mathbf{w}}
+\end{split}
+\end{equation*}
+
+\noindent If function $f$ is a linear function, i.e. $f(u) = u$, then:
+
+$$\mathbf{w^{new}} = \mathbf{w^{old}} + \lambda (y_i - h_i) \mathbf{x}_i$$
+\noindent where $h_i$ is predicted output, $y_i$ is the real output, and $x_i$ is inputs, for the $i$-th data \\
+
+\noindent The weights of all links with positive inputs need to be updated by decreasing their values. The weights of all links with negative inputs need to be updated by increasing their weights.
+
+\section{Limitation of Perceptron}
+
+\noindent The decision boundary of a perceptron is a linear hyperplane. If the problem is not linearly separable, the algorithm fails to converge. \\
+
+\noindent The algorithm may stuck in local minima, sensitive to the starting point.
+
+
+\end{multicols}
