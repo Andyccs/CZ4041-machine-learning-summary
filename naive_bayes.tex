@@ -1,0 +1,192 @@
+\chapter{Bayesian Decision Theory}
+
+\begin{multicols}{2}
+\noindent In many applications, the relationship between the input features and the output class is non-deterministic. Bayesian classifiers aim to model probabilistic relationships between the input features and the ouput class. 
+
+\section{Probability Concepts}
+
+\noindent Let $X$ and $Y$ be random variable \\
+
+\noindent Marginal probability refers to the probability that variable Y will take on the value $y$
+
+$$P(Y = y)$$
+
+$$\sum_{y_{i}} P(Y = y_{i}) = 1$$
+
+\noindent The joint probability refers to the probability that variable $X$ will take on the value $x$ and variable $Y$ will take on the value $y$
+
+$$P(X=x, Y=y) = P(X=x \cap Y=y)$$
+
+\noindent Conditional probability refers to the probability that the variable $Y$ will take on the value $y$, given that the variable $X$ is observed to have the value $x$
+
+$$P( Y=y | X=x )$$
+
+$$\sum_{y_{i}} P(Y=y_{i} | X=x) = 1$$
+
+\noindent The Sum Rule
+
+$$P(X=x) = \sum_{y_{i}} P(X=x , Y=y_{i})$$
+
+$$P(X=x) = \sum_{z_{j}} \sum_{y_{i}} P(X=x , Y=y_{i}, Z=z_{j})$$
+
+\noindent The Product Rule
+
+\begin{equation*}
+\begin{split}
+    P(X=x,Y=y) &= P(Y=y|x=y) \times P(X=x)\\
+    &= P(X=x|Y=y) \times P(Y=y)
+\end{split}
+\end{equation*}
+
+\section{Bayes Theorem}
+
+$$P(Y|X)= \frac{P(X|Y) P(Y)}{P(X)}$$
+
+\noindent where:
+\begin{itemize}
+    \item $P(Y|X)$ Posterior probability
+    \item $P(X|Y)$ Likelihood
+    \item $P(Y)$ Prior probability
+    \item $P(X)$ Evidence
+\end{itemize}
+
+\noindent Likelihood $P(X|Y)$ is the probability of observing the data if the parameter of interest would have the current state
+
+\noindent By using Sum Rule and Product Rule, the equation also can be written as:
+
+$$P(Y|X)= \frac{P(X|Y) P(Y)}{P(X)}$$
+$$P(Y|X)= \frac{P(X|Y) P(Y)}{P(X,Y)+P(X,!Y)}$$
+$$P(Y|X)= \frac{P(X|Y) P(Y)}{P(X|Y)P(Y)+P(X|!Y)P(!Y)}$$
+
+\section{Bayesian Classifiers}
+
+\noindent Decide $Y=y_{i}$ if the posterior probability of $Y$, given a set of input $X$ is the highest
+
+\begin{equation*}
+\begin{split}
+    P(Y=y_{i}|X=x) &= \!\max_{k} P(Y=y_{k}|X=x) \\
+    &= \!\max_{k} P(X=x | Y = y_k) P(Y= y_k)
+\end{split}
+\end{equation*}
+
+\noindent If we only have two classes $Y=0$ and $Y=1$, then the equation can be rewritten:
+
+$$
+Y = 
+\begin{cases}
+0 & P(Y=0|X=x) > P(Y=1|X=x)\\
+1 & otherwise
+\end{cases}
+$$
+
+\section{Losses and Risks}
+
+\noindent By far, the decisions are assumed to be equally good or costly. However, in some applications, the cost of misclassification on different classes may be different. For example, to diagnose whether a patient has cancer or not, The cost of misclassifying a patient with cancer as a healthy patient is much higher than that of misclassifying a healthy patient without cancer as one with cancer.
+
+\subsection{Formulation}
+
+\noindent Define actions as $a_{i}, i=1...N$. $a_{i}$ is the action of predicting $Y_{i}$. The number of actions is equal to the number of class. 
+
+\noindent Define the loss of $a_{i}$ when the state is $y_{k}$ as $\lambda_{ik}$
+
+\noindent The expected risk for taking action $a_{i}$:
+
+$$R(a_{i} | X) = \sum^{K}_{k=1} P(Y_{k} | X)$$
+
+\noindent We choose the action $a_{i}$ with minimum risk:
+
+$$R(a_{i}|X) = \!\min_{k} R(a_{k}|X)$$
+
+\subsection{0/1 Loss}
+
+\noindent All correct decisions have no loss and all errors are equally costly
+
+$$
+\lambda_{ik} = 
+\begin{cases}
+0 & i=k\\
+1 & i \ne k
+\end{cases}
+$$
+
+\noindent In 0/1 loss, the choice of action is consitent with our choice before we define losses and risks
+
+\begin{equation}
+\begin{split}
+    R(a_i | X) &= \sum_{k=1}^K \lambda_{ik} P(Y_k|X) \\
+    &= \sum_{k \ne i} P(Y_k | X) \\
+    &= 1-P(Y_i|X)
+\end{split}
+\end{equation}
+
+\subsection{Reject or Doubt}
+
+\noindent The new loss function, where $0 < r < 1$ is the loss incurred for choosing the reject action:
+
+$$
+\lambda_{ik} = 
+\begin{cases}
+0 & i=k\\
+r & i = K + 1 \\
+1 & i \ne k
+\end{cases}
+$$
+
+\noindent The number of actions is equal to 1 + the number of class, $K$. 
+
+\noindent $a_{i}$ is the action of predicting $Y_{i}$.
+
+\noindent The action $a_{K+1}$ is reject action. 
+
+\section{Optimal Decision Rule}
+
+\noindent If we consider risk in our decision:
+
+\begin{itemize}
+    \item choose $Y_{i}$ if 
+    \begin{itemize}
+        \item $R(a_{i}|X) < R(a_{k}|X)$ for all $k \le K$ and $k \ne i$ and 
+        \item $R(a_{i}|X) < R(a_{K+1}|X)$
+    \end{itemize}
+    \item choose reject if
+    \begin{itemize}
+        \item $R(a_{K+1}|X) < R(a_{i}|X), i=1...K$
+    \end{itemize}
+\end{itemize}
+
+\noindent The above decision rule is the same as
+
+\begin{itemize}
+    \item choose $Y_{i}$ if 
+    \begin{itemize}
+        \item $P(Y_{i}|X) > P(Y_{k}|X)$ for all $k \le K$ and $k \ne i$ and 
+        \item $P(Y_{i}|X) > 1 - \lambda$
+    \end{itemize}
+    \item choose reject otherwise
+\end{itemize}
+
+\section{Naive Bayes Classifier}
+
+\noindent Assume that the features are conditionally independent given the class label, then the likelihood can be defined as:
+
+$$P(X_1, X_2, ..., X_d) = \prod_{i=1}^{d} P(X_{i}|Y = y_{k})$$
+
+\noindent To estimate conditional probabilities for continuous feature:
+
+$$P(X_{i}| Y=y_{k}) = \frac{1}{\sqrt{2 \pi \sigma^{2}_{ik}}} exp \bigg\{ - \frac{(X_{i} - \mu_{ik})^{2} }{2 \sigma^{2}_{ik}} \bigg\}$$
+
+\subsection{Laplace Estimate and M-estimate}
+
+\noindent Original:
+
+$$P(X_{i} = x_{k} | Y = y_{j}) = \frac{| (X_{i}=x_{k}) \cap (Y=y_{j}) |}{| Y=y_{j} |}$$
+
+\noindent Laplace:
+
+$$P(X_{i} = x_{k} | Y = y_{j}) = \frac{| (X_{i}=x_{k}) \cap (Y=y_{j}) | + 1}{| Y=y_{j} | + n_{i}}$$
+
+\noindent m-estimate:
+
+$$P(X_{i} = x_{k} | Y = y_{j}) = \frac{| (X_{i}=x_{k}) \cap (Y=y_{j}) |+m\times p}{| Y=y_{j} | + m}$$
+
+\end{multicols}

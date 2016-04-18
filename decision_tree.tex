@@ -1,0 +1,30 @@
+\chapter{Decision Tree}
+
+\section{Hunt's Algorithm}
+
+Hunt's algorithm grows a decision tree in a recursive fashion by partitioning the training records into successively purer subsets. Let $D_t$ be the set of training records that reach a node $t$:
+
+\begin{itemize}
+\item If $D_t$ contains records that belong the same class $y_t$, then $t$ is a leaf node labeled as $y_t$
+\item If $D_t$ is an empty set, then t is a leaf node labeled by the default class
+\item If $D_t$ contains records that belong to more than one class, use an attribute test to split the data into smaller subsets.
+\end{itemize}
+
+\section{Measure of Node Impurity: Entrophy}
+
+$$Entrophy(t)=-\sum P(j \mid t) log_2 P(j \mid t)$$ 
+
+\noindent Maximum value: $log_{2} n_{c}$
+
+\noindent Minimum value: 0
+
+$$GAIN_{split}=Entrophy(p)-\sum_{i=1}^{k} \frac{n_i}{n}Entrophy(i)$$
+\noindent
+Disadvantage: Tends to prefer splits that result in large number of partitions, each being small but pure. \\
+
+\noindent Introduce Gain Ratio: 
+
+$$GainRATIO_{split}=\frac{GAIN_{split}}{SplitINFO}$$
+
+$$SplitINFO=-\sum_{i=1}^{k} \frac{n_i}{n}log_2 \frac{n_i}{n}$$ \\
+

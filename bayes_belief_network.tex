@@ -1,0 +1,21 @@
+\chapter{Bayesian Belief Networks}
+
+\noindent When two features are correlated, the independent assumption in Naive Bayes Classifier is not true:
+
+$$P(X_1 , X_2 | Y) = P(X_1 | Y) = P(X_2 | Y)$$
+$$P(X_1 , X_2 | Y) \ne P(X_1 | Y) \times P(X_2 | Y)$$
+
+\noindent Bayesian network provides a graphical representation of the probabilistic relationships among a set of random variables. There are two key elements:
+
+\begin{enumerate}
+    \item A directed acyclic graph that shows the dependence relationships among set of variables
+    \item A probability table associating each node to its immediate parent nodes
+\end{enumerate}
+
+\noindent Rules in Bayesian Belief Network:
+
+\begin{enumerate}
+    \item If node A has a direct arrow to node B, then we say A has a direct influence on B
+    \item A node is in a Bayesian network is conditionally independent of its non-descendants, if its parents are known
+    \item Two nodes are independent if they do not share a common parent
+\end{enumerate}
