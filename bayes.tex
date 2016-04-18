@@ -64,8 +64,8 @@ $$P(Y|X)= \frac{P(X|Y) P(Y)}{P(X|Y)P(Y)+P(X|!Y)P(!Y)}$$
 
 \begin{equation*}
 \begin{split}
-    P(Y=y_{i}|X=x) &= \!\max_{k} P(Y=y_{k}|X=x) \\
-    &= \!\max_{k} P(X=x | Y = y_k) P(Y= y_k)
+    P(Y=y_{i}|X=x) &= \!\max_{k} P(Y=y_{k}|X) \\
+    &= \!\max_{k} P(X | Y = y_k) P(Y= y_k)
 \end{split}
 \end{equation*}
 
@@ -160,28 +160,71 @@ $$P(Y_{i}|X) > P(Y_{k}|X), \forall k|k \ne i$$
 $$P(Y_{i}|X) > 1 - \lambda_{[K+1][k]}$$
 \noindent Choose reject otherwise
 
+\section{Independence and Conditionally Independent}
+
+\noindent Variable X and Y are independent if:
+
+$$P(X,Y)=P(X|Y) P(Y) = P(X) P(Y)$$
+
+\noindent Variables in X are conditionally independent of Y, given Z if:
+
+$$P(X|Y,Z) = P(X|Z)$$ 
+
+\noindent The conditional independence between X and Y given Z can be written as:
+
+\begin{equation*}
+\begin{split}
+    P(X,Y|Z) &= \frac{P(X,Y,Z)}{P(Z)}\\
+    &= \frac{P(X,Y,Z)}{P(Y,Z)}\times \frac{P(Y,Z)}{P(Z)} \\
+    &= P(X|Y,Z) \times P(Y|Z) \\
+    &= P(X|Z) \times P(Y|Z)
+\end{split}
+\end{equation*}
+
 \section{Naive Bayes Classifier}
 
 \noindent Assume that the features are conditionally independent given the class label, then the likelihood can be defined as:
 
 $$P(X_1, X_2, ..., X_d) = \prod_{i=1}^{d} P(X_{i}|Y = y_{k})$$
 
-\noindent To estimate conditional probabilities for continuous feature:
+\noindent As a result, the bayesian classifier can be rewritten as:
+
+\begin{equation*}
+\begin{split}
+    P(Y=y_{i}|X=x) &= \!\max_{k} P(Y=y_{k}|X) \\
+    &= \!\max_{k} P(X | Y = y_k) P(Y= y_k) \\
+    &= \!\max_{k} P(Y=y_k) \prod_{i=1}^{d} P(X_{i}|Y = y_{k})
+\end{split}
+\end{equation*}
+
+\noindent To estimate conditional probabilty for discrete feature:
+
+$$P(X_i=x_j|Y=y_k) = \frac{|X_i = x_j \cap Y=y_k|}{|Y=y_k|}$$
+
+\noindent To estimate conditional probabilities for continuous feature, we can discretize the range into bin, or use probability density estimation:
 
 $$P(X_{i}| Y=y_{k}) = \frac{1}{\sqrt{2 \pi \sigma^{2}_{ik}}} exp \bigg\{ - \frac{(X_{i} - \mu_{ik})^{2} }{2 \sigma^{2}_{ik}} \bigg\}$$
 
 \subsection{Laplace Estimate and M-estimate}
 
+If one of the conditional probability is zero, then the entire expression becomes zero. We use laplace estimate and m-estimate to avoit this situation. 
+
 \noindent Original:
 
 $$P(X_{i} = x_{k} | Y = y_{j}) = \frac{| (X_{i}=x_{k}) \cap (Y=y_{j}) |}{| Y=y_{j} |}$$
 
-\noindent Laplace:
+\noindent Laplace ($n_i$ is the number of possible values of $X_i$):
 
 $$P(X_{i} = x_{k} | Y = y_{j}) = \frac{| (X_{i}=x_{k}) \cap (Y=y_{j}) | + 1}{| Y=y_{j} | + n_{i}}$$
 
-\noindent m-estimate:
+\noindent M-estimate ($m$ and $p$ are user-specified parameters):
 
 $$P(X_{i} = x_{k} | Y = y_{j}) = \frac{| (X_{i}=x_{k}) \cap (Y=y_{j}) |+m\times p}{| Y=y_{j} | + m}$$
+
+\subsection{Pros and Cons}
+
+\noindent Pros: Computationally efficient
+
+\noindent Cons: Independence assumption may not hold for some features. Correlated features can degrade the performance of Naive Bayes classifiers
 
 \end{multicols}
