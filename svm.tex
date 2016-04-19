@@ -87,8 +87,8 @@ $$d = \frac{2}{\| \mathbf{w} \|_2}$$
 \subsection{Learning in SVM}
 
 \noindent We want to:
-$$\!\min_w \frac{2}{\| \mathbf{w} \|_2^2}$$
-$$\!\max_w \frac{\| \mathbf{w} \|_2^2}{2}$$
+$$\!\max_w \frac{2}{\| \mathbf{w} \|_2^2}$$
+$$\!\min_w \frac{\| \mathbf{w} \|_2^2}{2}$$
 
 \noindent Subjected to the following constraints:
 $$\mathbf{w} \cdot \mathbf{x}_i + b \ge 1, \text{if}\ y_i=1$$
@@ -122,7 +122,7 @@ $$\sum_{i=1}^n \xi_i$$
 \noindent The number of misclassifications is \#{$\xi_i > 1$} and the number of nonseparable points is \#{$\xi_i > 0$} \\
 
 \noindent Learning with soft errors:
-$$\!\max_w \frac{\| \mathbf{w} \|_2^2}{2} + C \sum_{i=1}^n \xi_i$$
+$$\!\min_w \frac{\| \mathbf{w} \|_2^2}{2} + C \sum_{i=1}^n \xi_i$$
 $$\text{s.t. } y_i \times (\mathbf{w} \cdot \mathbf{x}_i + b) \ge 1 - \xi_i, i=1,\ldots,N \text{ and } \xi_i \ge 0$$
 \noindent where $C \ge 0$ is a parameter to tradeoff the impact of margin maximization and tolerable errors
 

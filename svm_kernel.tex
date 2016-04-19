@@ -1,0 +1,37 @@
+\chapter{SVM with Kernels}
+
+\begin{multicols}{2}
+
+\section{Non-linear SVM}
+
+\noindent To generalize linear decision boundary to become non-linear, we transform $\mathbf x_i$ to higher dimensional space using a function $\varphi(\mathbf{x_i})$.
+
+$$\varphi : \mathbf{x} \rightarrow \varphi(\mathbf{x})$$
+
+\noindent Assumption: in a higher dimensional space, it is easier to find a linear hyperplane to classify data. \\
+
+\noindent The optimization problem of non-linear SVM becomes:
+
+$$\!\min_w \frac{\| \mathbf{w} \|_2^2}{2}$$
+$$\text{s.t. } y_i \times (\mathbf{w} \cdot \varphi(\mathbf{x}_i) + b) \ge 1$$
+
+\noindent However, computation in the feature space can be costly because it is high dimensional. As a result, we use kernel trick for optimization. 
+
+\section{Kernel Trick}
+
+\noindent If $\varphi(\cdot)$ satisfies Mercer function (positive-definite function), then we can find a kernel function $k(\cdot,\cdot)$ such that:
+
+$$k(\mathbf{x}_i, \mathbf{x}_j) = \varphi(\mathbf{x}_i)\cdot \varphi(\mathbf{x}_j)$$
+
+\subsection{Kernel Function Examples}
+\noindent Linear kernel:
+$$k(\mathbf{x}_i,\mathbf{x}_j)=\mathbf{x}_i \cdot \mathbf{x}_j$$
+
+\noindent Radial basis function kernel:
+$$k(\mathbf{x}_i,\mathbf{x}_j)=exp\Big(-\frac{\|\mathbf{x}_i - \mathbf{x}_j\|_2^2}{2 \sigma^2} \Big)$$
+
+\noindent Polynomial kernel:
+$$k(\mathbf{x}_i,\mathbf{x}_j)=(\mathbf{x}_i\cdot \mathbf{x}_j + 1)^d$$
+
+
+\end{multicols}
