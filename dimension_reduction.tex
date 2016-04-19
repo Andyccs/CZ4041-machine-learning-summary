@@ -1,0 +1,84 @@
+\chapter{Dimensionality Reduction}
+
+\begin{multicols}{2}
+\noindent We reduce dimension:
+\begin{enumerate}
+    \item To reduce time and space complexity
+    \item For data visualisation 
+\end{enumerate}
+
+\noindent Feature selection means we choose $k<d$ important features, by using subset selection algorithms. \\
+
+\noindent Feature extraction means we project the original $d$ dimensions to new $k<d$ dimensions.
+
+\section{Math: Eigenvalues and Eigenvectors}
+
+\noindent Let $\mathbf{A}$ be a square matrix and $\lambda$ be an eigenvalue. If $\mathbf{x}$ is an eigenvector of $\mathbf{A}$, then:
+$$\mathbf{Ax} = \lambda \mathbf{x}$$ 
+$$(\mathbf{A}-\lambda \mathbf{I})\mathbf{x} = 0$$
+
+\noindent Since we don't want $\mathbf{x}$ to be 0, then $|\mathbf{A} - \lambda \mathbf{I}|=0$, because if the determinant is not equal to zero, then $\mathbf{x} = 0$:
+
+$$(\mathbf{A}-\lambda \mathbf{I})^{-1}(\mathbf{A}-\lambda \mathbf{I})\mathbf{x} = (\mathbf{A}-\lambda \mathbf{I})^{-1} \times 0$$
+$$\mathbf{x} = 0$$
+
+\section{Principal Components Analysis}
+
+\noindent Find a low-dimensional space such that when $\mathbf{x}$ is projected there, information loss is minimized. The project of $\mathbf{x}$ on the direction of $\mathbf{w}$ is:
+$$z=\mathbf{w}^{T}\mathbf{x}=|w||x| \cos \theta$$
+
+\noindent Goal: find $\mathbf{w}$ such that $Var(z)$ is maximized
+\begin{equation*}
+\begin{split}
+    Var(z) &= Var(\mathbf{w}^{T}\mathbf{x}) \\
+    &= \mathbf{w}^{T} E[(\mathbf{x}-\mathbf{\mu})(\mathbf{x}-\mathbf{\mu})^{T}] \mathbf{w} \\
+    &= \mathbf{w}^{T} \Sigma \mathbf{w}\\
+    Var(\mathbf{x}) &= \Sigma \\
+    &= \frac{1}{m} \sum_{i=1}^n \mathbf{x}^{(i)} (\mathbf{x}^{(i)})^{T}
+\end{split}
+\end{equation*}
+
+\noindent After maximizing $Var(z)$, we will get $\mathbf{W}$, which the columns are the eigenvectors of $\Sigma$, with dimension $d\times d$. The reduced data $z$:
+$$\mathbf{z} = \mathbf{W}_{\text{reduce}}^{T} (\mathbf{x} - \mathbf{\mu})$$
+
+\noindent where $\mathbf{W}_{\text{reduce}}$ has a dimension of $(d\times k), k<d$, and $\mathbf{z}$ has a dimension of $(k\times 1)$. To reconstruct the approximate data $\mathbf{x}$:
+$$x_{\text{approx}} = \mathbf{W}_{\text{reduce}} \mathbf{z}$$
+
+\subsection{Choosing the Dimension}
+
+\noindent The average squared projection error is:
+$$A = \frac{1}{m} \sum_{i=1}^m \| x^{(i)} - x^{(i)}_{\text{approx}}\|^2$$
+
+\noindent Total variation in the data:
+$$B = \frac{1}{m} \sum_{i=1}^m \| x^{(i)}\|^2$$
+
+\noindent Typically, we choose $k$ to be smallest value so that 90\% of variance is retained:
+$$\frac{A}{B} \le 0.1$$
+
+\noindent It can be proved that the above equation is equivalent to:
+$$1 - \frac{\lambda_1+\lambda_2+\ldots+\lambda_k}{\lambda_1+\lambda_2+\ldots+\lambda_k+\ldots+\lambda_d} \le 0.1$$
+$$\frac{\lambda_1+\lambda_2+\ldots+\lambda_k}{\lambda_1+\lambda_2+\ldots+\lambda_k+\ldots+\lambda_d} > 0.9$$
+
+\section{Math: Spectral Decomposition}
+\noindent Spectral decomposition is the factorization of a matrix into a canonical form. Let $\mathbf{S}$ be a square $(N\times N)$ matrix, then it can be factorized as:
+$$\mathbf{S}=\mathbf{WDW}^{T}$$
+
+\noindent where $\mathbf{W}$ is the square $(N\times N)$ matrix whose ith column is the eigenvector $w_i$ of $\mathbf{S}$, and $\mathbf{D}$ is the diagonal matrix whose diagonal elements are the corresponding eigenvalues.
+
+\section{Feature Embedding}
+\noindent When $\mathbf{X}$ is a $N\times d$ data matrix, the covariance matrix is $\mathbf{X}^{T} \mathbf{X}$ with dimension $d\times d$ (if mean-centered). This is use by PCA. \\
+
+\noindent The pairwise similarities of instance is $\mathbf{X} \mathbf{X}^{T}$ with $N\times N$ dimension. This is used in faeture embedding:
+$$\mathbf{X} \mathbf{X}^{T} = \mathbf{VEV}^{T}$$
+
+\noindent where $\mathbf{V}$ has eigenvectors of $\mathbf{X} \mathbf{X}^{T}$ as column with dimension $N\times N$, $\mathbf{E}$ is a diagonal $N\times N$ matrix with eigenvalues. After factorizing, we take $V_{\text{reduce}}$ with dimension $N\times k$, where $k<N$, as features. Feature embedding is preferred when $N<d$. 
+
+\section{Math: Singular Value Decomposition}
+\noindent Singular value decomposition:
+$$\mathbf{X} = \mathbf{VAW}^{T}$$
+
+\noindent $\mathbf{V}$ is $N\times N$ and contains the eigenvectors of $\mathbf{XX}^T$
+\noindent $\mathbf{W}$ is $d\times d$ and contains the eigenvectors of $\mathbf{X}^T \mathbf{X}$
+\noindent $\mathbf{A}$ is $N\times d$ contains singular values on its first $k$ diagonal
+
+\end{multicols}
