@@ -1,0 +1,45 @@
+\chapter{Nearest Neighbour Classifier}
+
+\begin{multicols}{2}
+
+\noindent In nearest neighbour classifier, we use $k$ closest points to perform classification. To classify an unknown instance:
+
+\begin{enumerate}
+    \item Compute distance to other training instances
+    \item Identiy $k$ nearest neighbours
+    \item Use class labels of nearest neighbours to determine the class label of unknown record
+\end{enumerate}
+
+\noindent One way to compute distance between two points are by using Euclidean distance:
+
+$$d(\mathbf{x},\mathbf{z}) = \sqrt{\sum_{i=1}^m (x_i - z_i)^2} = \|\mathbf{x} - \mathbf{z}\|$$
+
+\noindent To determine the class from nearest neighbour, we can take the majority vote of class labels among the $k$-nearest neighbours:
+$$
+I = 
+\begin{cases}
+1 & y = y_i\\
+0 & y \ne y_i
+\end{cases}
+$$
+$$y^* = \arg\!\max_y \sum_{x_i,y_i \in N_{x^*}} I(y = y_i)$$
+
+\section{Distance-weight Voting}
+
+\noindent Using majority vote means every neighbour has the same impact on the classification. This make the algorithm sensitive to the choice of $k$. If $k$ is too small, sensitive to noise points. If $k$ is too large, neighborhood may include points from other classes. \\
+
+\noindent To solve this problem, we use distance-weight voting
+$$w_i=\frac{1}{d(x^*,x_i)^2}$$
+$$y^* = \arg\!\max_y \sum_{x_i,y_i \in N_{x^*}} w_i \times I(y = y_i)$$
+
+
+\section{Feature Scaling}
+
+\noindent Feature may have to be scaled to prevent distance measures from being dominated by one of the features. We can normalize the features to be near mean of zero and standard deviation of one to prevent this problem. 
+
+\section{Disadvantages}
+
+kNN classifiers are lazy learners and hence does not build models explicitly. In addition, classifying unknown records are relatively expensive. 
+
+
+\end{multicols}
