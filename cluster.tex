@@ -1,0 +1,116 @@
+\chapter{Cluster Analysis}
+
+\begin{multicols}{2}
+
+\noindent Finding groups of objects such that the object in a group will be similar to one another and different from the objects in other gourps. Intra-cluster distances are minimized and inter-cluster distances are maximized. 
+
+\noindent A clustering is a set of clusters. There are two types of clusters:
+
+\begin{enumerate}
+    \item Partitional Clustering: non-overlapping, each data is in exactly one subset.
+    \item Hierarchical clustering: a set of nested clusters organized as a hierarchical tree. 
+\end{enumerate}
+
+\section{K-means Clustering}
+
+\noindent Algorithm:
+
+\begin{enumerate}
+    \item Select K points as the initial centroids
+    \item Repeat
+    \begin{enumerate}
+        \item For K clusters by assigning all points to the closest centroid
+        \item Recompute the centroid of each cluster
+    \end{enumerate}
+    \item Until the centroids don't change
+\end{enumerate}
+
+\subsection{Selecting Initial Points}
+
+\noindent If there are $K$ real clusters, then the chance of selecting one centroid from each cluster is small. To solve this problem, we can (1) run the algorithm multiple times, (2) use hierachical clustering to determine initial centroids, and (3) select more than $k$ initial centroids and then select among these initial centroids
+
+\subsection{Evaluating K-means Clustering}
+
+\noindent We use sum of squared error:
+
+$$SSE=\sum_{i=1}^K \sum_{x \in C_i} dist^2 (m_i,x)$$
+
+\noindent Given two clustering, we choose the one with smaller error.
+
+\subsection{Limitation of K-means}
+
+K-means does not perform well with clusters of different sizes and densities and when data contains outliers. The number of clusters is difficult to determine. 
+
+\section{Hierarchical Clustering}
+
+\noindent Produce a set of nested clusters organized as a hierachical tree. Hierarchical clustering do not assume any particular number of clusters and they may correspond to meaningful taxonomies. 
+
+\subsection{Agglomerative Clustering Algorithm}
+
+\noindent Start with the points as individual clusters. At each step, merge the closest pair of clusters until only one cluster left. Algorithm:
+\begin{enumerate}
+    \item Compute the proximity matrix
+    \item Let each data point be a cluster
+    \item Repeat
+    \begin{enumerate}
+        \item Merge the two closest clusters
+        \item Update the proximity matrix
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Update Proximity Matrix}
+\noindent Four way to update proximity matrix:
+\begin{enumerate}
+    \item Single-link: similarity of closest points
+    \item Complete-link: similarity of furthest points
+    \item Distance between centroids
+    \item Group average
+\end{enumerate}
+
+\noindent For group average, the proximity of two clusters is:
+$$\text{proximity}(C_i, C_j) = \frac{\sum_{p_i \in C_i, p_j \in C_j} \text{proximity}(p_i,p_j)}{|C_i|\times|C_j|}$$
+
+\noindent Group average is less susceptible to noise and outliers, but is biased toward globular clusters. 
+
+\section{Measures of Cluster Validity}
+
+\noindent Numerical measures are classified into three types:
+
+\begin{enumerate}
+    \item External Index: used to measure the extend to which cluster labels (entropy and purity)match externally supplied class labels
+    \item Internal Index: used to measure the goodness of clustering structure without respect to external information
+    \item Relative index: used to compare two different clusterings or clusters
+\end{enumerate}
+
+\subsection{Sum-of-square Error}
+
+$$SSE=\sum_{i=1}^K \sum_{x \in C_i} dist^2 (m_i,x)$$
+
+\subsection{Cohesion and Separation}
+
+\noindent Cluster cohesion measures how closely related are bojects in a cluster
+
+\noindent Cluster separation measure how distinct or well-separated a cluster is from other clusters \\
+
+\noindent Within Cluster sum of squares:
+$$WSS=\sum_i \sum_{x \in C_i} (\mathbf{x}-\mathbf{m}_i)^2$$
+
+\noindent Between cluster sum of squares:
+$$BSS=\sum_i |C_i| (m-m_i)^2$$
+
+\subsection{Entropy and Purity}
+
+\noindent Probability of class $i$ in cluster $j$:
+
+$$p_{ij} = \frac{m_{ij}}{m_j}$$
+
+\noindent Entropy of cluster $j$:
+$$e_j = - \sum_{i}^{L} p_{ij} \times log_2 (p_{ij})$$
+$$e = \sum_{i=1}^K \frac{m_i}{m} e_j$$
+
+\noindent Purity of cluster $j$:
+
+$$\text{purity}_j= \!\max_i p_{ij}$$
+$$\text{purity} = \sum_{i=1}^K \frac{m_i}{m}\text{purity}_j$$
+
+\end{multicols}
