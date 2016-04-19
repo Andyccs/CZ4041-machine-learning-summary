@@ -1,0 +1,69 @@
+\chapter{Regression}
+
+\begin{multicols}{2}
+\section{Linear Regression Model}
+
+\noindent Goal: to learn a linear function $f(\mathbf{x})$ in term of $\mathbf{w}$ and b, such that the difference between the predicted values $f(\mathbf{x}_i)'$ and the ground-truth value $y_i$ is as small as possible. 
+$$f(\mathbf{x}) = \mathbf{w} \cdot \mathbf{x} + b = \mathbf{w} \cdot \mathbf{x}$$
+
+\noindent We can use sum-of-squares error:
+$$E(\mathbf{w}) = \frac{1}{2} \sum_{i=1}^N ( f(\mathbf{x}) - y_i )^2$$
+
+\noindent We want to learn a linear model that minimizing the error:
+$$\mathbf{w}^* = \arg\!\min_w E(\mathbf{w})$$
+
+\subsection{Linear Regression Learning}
+\noindent To solve the unconstrained minimization problem, we can set the derivative to zero
+\begin{equation*}
+\begin{split}
+    \frac{\partial E(\mathbf{w})}{\partial \mathbf{w}} &= 0\\
+    \frac{\partial \Big(\frac{1}{2} \sum_{i=1}^N (\mathbf{w} \cdot \mathbf{x}_i - y_i)^2\Big)}{\partial \mathbf{w}} &= 0 \\
+    \sum_{i=1}^N (\mathbf{w} \cdot \mathbf{x}_i - y_i)\mathbf{x}_i &= 0 \\
+    \sum_{i=1}^N (\mathbf{w} \cdot \mathbf{x}_i)\mathbf{x}_i - \sum_{i=1}^N y_i \mathbf{x}_i &= 0 \\
+    \mathbf{w}^T(\mathbf{X}^T \mathbf{X}) - \mathbf{y}^T \mathbf{X} &= 0 \\
+    (\mathbf{X}^T \mathbf{X}) \mathbf{w} - \mathbf{X}^T \mathbf{y} &= 0 \\
+    \mathbf{w} &= (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}
+\end{split}
+\end{equation*}
+
+\subsection{Linear Regression Regularization}
+
+\noindent To avoid overfitting, we add regularization term:
+$$E(\mathbf{w}) = \frac{1}{2} \sum_{i=1}^N ( f(\mathbf{x}) - y_i )^2 + \frac{\lambda}{2} \| \mathbf{w}\|_2^2$$
+
+The closed-form solution for $\mathbf{w}$ can be obtained by setting the derivative of $E(\mathbf{w})$ w.r.t. $\mathbf{w}$ to zero:
+$$\mathbf{w} = (\mathbf{X}^T \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^T \mathbf{y}$$
+
+\section{Linear Basis Function Models}
+
+\noindent The linear function $f(\mathbf{x})$ in terms of a set of basis functions is written as:
+$$f(\mathbf{x}) = \mathbf{w} \cdot \mathbf{\phi}(\mathbf{x})$$
+\noindent where $\mathbf{\phi}(\mathbf{x})=(\phi_0(\mathbf{x}), \phi_1(\mathbf{x}),\ldots, \phi_m(\mathbf{x}))$, and each $\phi_i(\mathbf{x})$ maps the instance $\mathbf{x}$ to a scalar. 
+
+\noindent If $d=m$, and $\phi_i(\mathbf{x}) = x_i$, then it is reduced to a standard linear model. 
+
+\subsection{Examples of Basis Functions}
+
+\noindent Polynomial basis functions:
+$$\phi_j(\mathbf{x}) = \|\mathbf{x} \|_2^j$$
+
+\noindent Gaussian basis functions:
+$$\phi_j(\mathbf{x}) = exp\Big(- \frac{\|\mathbf{x} - \mathbf{u}_j\|_2^2}{2\sigma^2} \Big)$$
+
+\noindent Sigmoid basis functions:
+$$\phi_j(\mathbf{x}) = \frac{1}{1 - exp\Big(- \frac{\|\mathbf{x} - \mathbf{u}_j\|_2}{\sigma} \Big)}$$
+
+\subsection{Linear Basis Function Learning}
+
+\noindent We want to minimize the following error:
+$$E(\mathbf{w}) = \frac{1}{2} \sum_{i=1}^N ( \mathbf{w} \cdot \phi(\mathbf{x}_i) - y_i )^2 + \frac{\lambda}{2} \| \mathbf{w}\|_2^2$$
+
+\noindent The closed-form solution for $\mathbf{w}$ can be written as:
+$$\mathbf{w} = (\mathbf{\Phi}^T \mathbf{\Phi} + \lambda \mathbf{I})^{-1} \mathbf{\Phi}^T \mathbf{y}$$
+
+\subsection{Limiation of Linear Basis Function}
+
+\noindent In practice, to learn a precise regression model, we may need a large number of basis functions. The computational cost is expensive
+
+\end{multicols}
+
