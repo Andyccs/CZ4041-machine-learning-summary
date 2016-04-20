@@ -93,7 +93,18 @@ $$MSE(p_{KDE}(x)) = E[p_{KDE}(x) - p(x)]^2 + var(p_{KDE}(x))$$
     \item A small bandwidth will reduce the bias of $p_{KDE}(x)$, at the expense of larger variance in the estimates $p_{KDE}(x)$.
 \end{itemize}
 
-\section{Product Kernels}
-
 \section{K-nearest Neighbour}
+
+\noindent In this approach, we fix the value of $k$ and determining the minimum volume $V$ that encompasses $k$ points in the dataset. 
+$$p(x)\approx \frac{k}{NV} = \frac{k}{N \times c_d \times R_k^d (d)}$$
+\noindent where $R_k^d(x)$ is the distance between the estimation point $x$ and its k-th closest neighbour, $d$ is dimension of data, $c_d$ is the volumne of the unit sphere in $d$ dimensions, which is equal to:
+$$
+c_d = 
+\begin{cases}
+2 & d=1 \\
+\pi & d=2 \\
+\frac{4\pi}{3} & d=3
+\end{cases}
+$$
+
 \end{multicols}
