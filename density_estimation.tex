@@ -1,0 +1,99 @@
+\chapter{Non-parametric Density Estimation}
+
+\begin{multicols}{2}
+\noindent In parametric density estimation, we try to estimate $p(x|\omega_i, D_i)$ based on machine learning estimation. This approach requires some knowledge about the form of distribution. So, only the parameters need to be estimated. However, if we do not have any knowledge about the distribution, we need to use non-parametric density estimation. 
+
+\section{Histograms}
+
+\noindent Divide the sample space into a number of bins and approximate the density at the center of each bin by the fractiion of points in the training data that fall into the corresponding bin:
+$$P_H(x) = \frac{1}{N} \frac{[\text{number of } x^k \text{ in the same bin as x}]}{\text{width of bin containing x}}$$
+\noindent where $x^k$ is one training sample and $N$ is the number of training sample. \\
+
+\noindent Histrogram require two parameters, bin width and starting position of the first bin. \\
+
+\noindent The summation of $P_H(x) \times 2$ is equal to 1:
+$$\int P_H dx = \sum P_H(x_c) \times 2 = 1$$ 
+\section{General Theory for Non-parametric Density Estimation}
+
+\noindent The probability that a vector x, drawn from a distribution p(x), will fall in a given region R of the same space is:
+$$P=\int_R p(u) du$$
+
+\noindent If random variable $X$ follow binomial distribution, we say $X ~ B(n, p)$, with $n$ trials and $p$ probability of success. The probability of getting $k$ success in $n$ trials is:
+$$P(X=k) = \bigg( \begin{matrix} n \\ k \end{matrix}\bigg) p^k (1-p)^{n-k}$$
+$$\bigg( \begin{matrix} n \\ k \end{matrix}\bigg) = \frac{n!}{(n-k)!k!}$$
+
+\noindent The mean of binomial distribution is $E(k)=np$ and variance is $Var(k)=np(1-p)$. It can be proved that:
+$$E(k / n) = p$$
+$$Var(k / n) = \frac{p(1-p)}{n}$$
+
+\noindent When $N\rightarrow \infty$, $p(1-p)/n \approx 0$. It means that the distribution of $k/N$ becomes very sharp at $k/n=p$. Therefore, we can use $k/n$ to approximate $p$.
+
+$$P = \int_R p(x') dx' \approx p(x) V$$
+$$\frac{k}{N} \approx p(x) V$$
+$$p(x) \approx \frac{k}{nV}$$
+
+\noindent where $R$ is a very small region around $x$, $p$ is the probability density that we want to estimate, $V$ is the volume surrounding $x$, $n$ is the total number of examples, $k$ is the number of examples inside $V$.\\
+
+\noindent There are two approaches to apply this result:
+\begin{enumerate}
+    \item Kernel Density Estimation (KDE): fixed value of $V$ and determine $k$ from the data
+    \item kNN approach: fixed value of $k$ and determine volume $V$ from data
+\end{enumerate}
+
+\section{Parzen Windows}
+
+\noindent Let $R$ be a hypercube with sides of length $h$ centered at the estimation point $x$. Then in $d$ dimension, the volume is:
+$$V=h^d$$
+
+\noindent To count the number of sample points that fall inside the hypercube, we define a kernel function:
+$$K(u) = 
+\begin{cases}
+1 & |u_j| < 1/2, \forall j=1,\ldots,D \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+\noindent The total number of points inside the hypercube is:
+$$k= \sum_{i=1}^{N} K\Big( \frac{x-x^i}{h}\Big)$$
+
+\noindent Since we know $k$, $V$ and $N$, then:
+$$p_{KDE}(x) = \frac{1}{Nh^d} \sum_{i=0}^N K \Big( \frac{x-x^i}{h}\Big)$$
+
+\noindent Disadvantages of Parzen window:
+\begin{enumerate}
+    \item The estimated density has discontinuities
+    \item The weights of $x_i$ are equal, regardless of their distance to the estimation point x 
+\end{enumerate}
+
+\section{Smooth Kernerls}
+
+\noindent To overcome drawbacks in Parzen window, we can replace the hypercube in the original Parzen window with other smooth kernel functions $K(u)$ such that:
+
+$$\int_R K(x) dx = 1$$
+
+\noindent For example, multivariate Gaussian density function:
+$$K(x)=\frac{1}{(2 \pi)^{d/2}} exp \Big( - \frac{1}{2} x^T x\Big)$$
+
+\section{Bandwidth Selection}
+
+\noindent Problem of bandwidth:
+\begin{enumerate}
+    \item A large bandwidth will over-smooth the density and mask the structure in the data
+    \item A small bandwidth will yield a density estimate that is spiky and very hard to interpret
+\end{enumerate}
+
+\noindent We would like to find a smoothing parameter that minimizes the error between the estimated density, $p_{KDE}$ and the true density. The mean square error is:
+$$MSE(p_{KDE}(x)) = E[p_{KDE}(x) - p(x)]^2 + var(p_{KDE}(x))$$
+
+\noindent where the $E[p_{KDE}(x) - p(x)]^2$ is called the bias and $var(p_{KDE}(x))$ is called the variance. Bias shows the expected difference of the estimation, variance shows the variation of the estimation. \\
+
+\noindent The expression shows the bias-variance tradeoff; Reducing bias would increase variance and vice versa. Applying the bias-variance dilemma to bandwidth selction means that:
+\begin{itemize}
+    \item A large bandwidth will reduce the differences among the estimates of $p_{KDE}$ (the variance) but it will increase the bias of $p_{KDE}(x)$ with respect to the true density $p(x)$
+    \item A small bandwidth will reduce the bias of $p_{KDE}(x)$, at the expense of larger variance in the estimates $p_{KDE}(x)$.
+\end{itemize}
+
+\section{Product Kernels}
+
+\section{K-nearest Neighbour}
+\end{multicols}
