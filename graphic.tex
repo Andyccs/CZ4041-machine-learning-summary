@@ -150,4 +150,16 @@ $$P(X,Y)=P(X)P(Y)$$
 $$P(X|Z) = \frac{P(Z|X)P(X)}{P(Z)}$$
 $$P(X|Y,Z) = \frac{P(Z|X,Y) P(X|Y)}{P(Z|X)}$$
 
+\section{d-Separation}
+
+\noindent d-Separation generalizes the concept of blocking and separation. A path from node $A$ to node $B$ is blocked (d-separated) by $C$ (i.e. the path is $ACB$), if at least one of the following conditions are satisfied:
+
+\begin{enumerate}
+    \item $C$ is head-to-tail and $C$ is given
+    \item $C$ is tail-to-tail and $C$ is given
+    \item $C$ is head-to-head and $C$ and any descendants of $C$ are \textit{not} given
+\end{enumerate}
+
+\noindent If all paths are blocked, $A$ and $B$ are d-separated (conditionally independent) given $C$. 
+
 \end{multicols}
