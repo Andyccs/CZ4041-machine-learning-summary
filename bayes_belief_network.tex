@@ -1,8 +1,7 @@
 \chapter{Bayesian Belief Networks}
+\begin{multicols*}{2}
 
-\noindent When two features are correlated, the independent assumption in Naive Bayes Classifier is not true:
-
-$$P(X_1 , X_2 | Y) = P(X_1 | Y) = P(X_2 | Y)$$
+\noindent When two features are correlated, the independent assumption in Naive Bayes Classifier is not true, i.e. when $P(X_1 , X_2 | Y) = P(X_1 | Y)$
 $$P(X_1 , X_2 | Y) \ne P(X_1 | Y) \times P(X_2 | Y)$$
 
 \noindent Bayesian network provides a graphical representation of the probabilistic relationships among a set of random variables. There are two key elements:
@@ -12,10 +11,8 @@ $$P(X_1 , X_2 | Y) \ne P(X_1 | Y) \times P(X_2 | Y)$$
     \item A probability table associating each node to its immediate parent nodes
 \end{enumerate}
 
-\noindent Rules in Bayesian Belief Network:
+\noindent To determine whether two nodes are conditionally independent, we can use Bayes Ball Theorem, which will be discussed in section \ref{section:dseparation}. \\
 
-\begin{enumerate}
-    \item If node A has a direct arrow to node B, then we say A has a direct influence on B
-    \item A node is in a Bayesian network is conditionally independent of its non-descendants, if its parents are known
-    \item Two nodes are independent if they do not share a common parent
-\end{enumerate}
+\noindent The conditional probability table (CPT) of a node is constructed by only considering its direct parents. If a node $X$ has no parent, then CPT only contains $P(X)$. If a node $X$ has $Z_1, Z_2$ direct parents, then CPT contains $P(X|Z_1Z_2)$.
+
+\end{multicols*}

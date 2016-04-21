@@ -1,6 +1,6 @@
 \chapter{Graphical Models}
 
-\begin{multicols}{2}
+\begin{multicols*}{2}
 \noindent Bayesian networks is a probabistic graphical model that represents a set of random variables and their conditional dependencies via directed acyclic graph, where:
 \begin{itemize}
     \item Nodes are the random variables
@@ -150,7 +150,7 @@ $$P(X,Y)=P(X)P(Y)$$
 $$P(X|Z) = \frac{P(Z|X)P(X)}{P(Z)}$$
 $$P(X|Y,Z) = \frac{P(Z|X,Y) P(X|Y)}{P(Z|X)}$$
 
-\section{d-Separation}
+\section{d-Separation} \label{section:dseparation}
 
 \noindent d-Separation generalizes the concept of blocking and separation. A path from node $A$ to node $B$ is blocked (d-separated) by $C$ (i.e. the path is $ACB$), if at least one of the following conditions are satisfied:
 
@@ -162,4 +162,4 @@ $$P(X|Y,Z) = \frac{P(Z|X,Y) P(X|Y)}{P(Z|X)}$$
 
 \noindent If all paths are blocked, $A$ and $B$ are d-separated (conditionally independent) given $C$. 
 
-\end{multicols}
+\end{multicols*}
