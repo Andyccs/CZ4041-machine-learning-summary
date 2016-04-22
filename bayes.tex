@@ -227,4 +227,22 @@ $$P(X_{i} = x_{k} | Y = y_{j}) = \frac{| (X_{i}=x_{k}) \cap (Y=y_{j}) |+m\times 
 
 \noindent Cons: Independence assumption may not hold for some features. Correlated features can degrade the performance of Naive Bayes classifiers
 
+\section{Discriminant Functions}
+
+\noindent In classification, we can see the problem as to maximize some objective/discriminant function:
+$$\text{Choose }Y_i \text{ if } g_i(\mathbf{X}) = \!\max_k g_k(\mathbf{X})$$
+
+\noindent For example, in bayesian classifier, we can define $g_i(\mathbf{X}) = - R(a_i | \mathbf{X})$. The discriminant functions divide the feature space in $K$ decision regions:
+
+$$R_1,\ldots,R_K, \text{ where } R_1 = \{\mathbf{X}|g_i(\mathbf{X})\} =\!\max_k g_k(\mathbf{X})$$
+
+\noindent When there are only two classes, we can define a single discriminant function as:
+$$g(\mathbf{X})=g_1(\mathbf{X}) - g_2(\mathbf{X})$$
+$$\text{choose}
+\begin{cases}
+    Y_1 & \text{if } g(X) > 0 \\
+    Y_2 & \text{otherwise}
+\end{cases}
+$$
+
 \end{multicols*}
