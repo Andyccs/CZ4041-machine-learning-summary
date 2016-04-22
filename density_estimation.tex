@@ -107,4 +107,16 @@ c_d =
 \end{cases}
 $$
 
+\subsection{Approximation to Bayes Classifier}
+
+\noindent Given sample $x$, find the $P(c_1|x)$ and $P(c_2|x)$. The number of nearest neighbour $k$ is given. To solve this problem using kNN:
+
+\begin{enumerate}
+    \item Find the $k$ number of data that are closest to $x$
+    \item Compute $R$, the distance from $k$-th data to $x$
+    \item Find $k_1$, which is the number of data that are belong to $c_1$
+    \item Find $k_2$, which is the number of data that are belong to $c_1$
+    \item Compute $P(c_i|x) = \frac{k_i}{k}$
+\end{enumerate}
+
 \end{multicols*}
