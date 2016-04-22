@@ -94,4 +94,17 @@ $$S_B = \sum_{c \in (A,B,C)} |c| (m_c - m)(m_c - m)^T$$
 \noindent The LDA projection vectors are given by the \textbf{eigenvectors} of:
 $$S_W^{-1}S_B$$
 
+\section{Canonical Correlation Analysis}
+
+\noindent We want to find two projections $\mathbf{w}$ and $\mathbf{v}$ such that when $\mathbf{x}$ is projected along $\mathbf{w}$ and $\mathbf{y}$ is projected along $\mathbf{v}$, the correlation is maximize. 
+
+$$\rho = \text{Corr}(\mathbf{w}^T \mathbf{x}, \mathbf{v}^T \mathbf{y})$$
+$$\rho = \frac{\mathbf{w}^T\mathbf{S}_{xy}\mathbf{v}}{\sqrt{\mathbf{w}^T\mathbf{S}_{xx}\mathbf{w}}\sqrt{\mathbf{v}^T\mathbf{S}_{yy}\mathbf{v}}}$$
+$$\mathbf{S}_{xy} = \text{Cov}(\mathbf{x},\mathbf{y})$$
+
+\noindent Solution for the maximization problems:
+
+$$\mathbf{w} = \text{eigenvectors}(\mathbf{S_{xx}^{-1}S_{xy}S_{yy}^{-1}S_{yx}})$$
+$$\mathbf{v} = \text{eigenvectors}(\mathbf{S_{yy}^{-1}S_{yx}S_{xx}^{-1}S_{xy}})$$
+
 \end{multicols*}
