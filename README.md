@@ -2,7 +2,7 @@
 
 This LaTex document is a summary of the course CZ4041 Machine Learning, offered by School of Computer Science and Engineering, Nanyang Technological University, Singapore. 
 
-To download this document in PDF format: [download now](https://github.com/Andyccs/CZ4041-machine-learning-summary/releases/download/v1.0/CZ4041MachineLearningSummary.pdf). 
+To download this document in PDF format: [download now](https://github.com/Andyccs/CZ4041-machine-learning-summary/releases/download/v1.1/CZ4041MachineLearningSummary.pdf). 
 
 ## Development
 
