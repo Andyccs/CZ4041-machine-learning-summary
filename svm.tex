@@ -62,7 +62,7 @@ $$\mathbf{w} \cdot (\mathbf{x}_a -\mathbf{x}_b) = 0$$
 \noindent For any circle $\mathbf{x}_c$ located above the decision boundary:
 $$\mathbf{w} \cdot \mathbf{x}_c + b = k, k>0$$
 \noindent Similary, for any square $\mathbf{x}_s$ located below the decision boundary:
-$$\mathbf{w} \cdot \mathbf{x}_s + b = k', k<0$$
+$$\mathbf{w} \cdot \mathbf{x}_s + b = k', k'<0$$
 
 \noindent The two parallel hyperplanes passing the closest circle and square can be written as:
 $$\mathbf{w} \cdot \mathbf{x} + b = \bar{k}$$
@@ -92,7 +92,7 @@ $$\!\min_w \frac{\| \mathbf{w} \|_2^2}{2}$$
 
 \noindent Subjected to the following constraints:
 $$\mathbf{w} \cdot \mathbf{x}_i + b \ge 1, \text{if}\ y_i=1$$
-$$\mathbf{w} \cdot \mathbf{x}_i + b \le 1, \text{if}\ y_i=-1$$
+$$\mathbf{w} \cdot \mathbf{x}_i + b \le -1, \text{if}\ y_i=-1$$
 
 \noindent The constraints are equivalent to:
 $$y_i \times (\mathbf{w} \cdot \mathbf{x}_i + b) \ge 1$$
@@ -113,7 +113,7 @@ $$y_i \times (\mathbf{w} \cdot \mathbf{x}_i + b) \ge 1 - \xi_i$$
     \item If $\xi_i=0$, there is no problem with $\mathbf x_i$
     \item If $0<\xi_i<1$, $\mathbf x_i$ is correctly classified but in the margin
     \item If $\xi_i=1$, $\mathbf x_i$ is on the decision boundary
-    \item If $\xi_i=1$, $\mathbf x_i$ is misclassified
+    \item If $\xi_i>1$, $\mathbf x_i$ is misclassified
 \end{itemize}
 
 \noindent The total soft errors are:

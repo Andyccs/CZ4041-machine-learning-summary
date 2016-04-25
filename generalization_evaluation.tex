@@ -20,7 +20,7 @@ Given two models of similar generalization errors, one should prefer the simpler
 
 \subsection{Pressimistic Error Estimate}
 
-\noindent Explicityly computer generalization error as the sum of training error and a penalty term for model complexity. \\
+\noindent Explicitly compute generalization error as the sum of training error and a penalty term for model complexity. \\
 
 \noindent Let $e(T)$ be the training errors, $e'(T)$ be the generalization errors, $\lambda$ be an tradeoff parameter, and $\Omega(T)$ be model complexity:
 
@@ -34,7 +34,7 @@ Divide the original training data set into two smaller subsets. One is for train
 
 \section{Prevent Overfitting}
 
-\noindent In decision tree, we can prevent overfitting by pre-prunining (early stopping rule). Typical stopping conditions for a node:
+\noindent In decision tree, we can prevent overfitting by pre-pruning (early stopping rule). Typical stopping conditions for a node:
 
 \begin{itemize}
     \item Stop if all instances belong to the same class
@@ -112,7 +112,7 @@ $$FPR = \frac{FP}{TN + FP}$$
 \begin{description}
     \item[Holdout] reserve 2/3 for training and 1/3 for testing, sampled without replacement
     \item[Random subsampling] repeated holdout. The average accuracy for all samples are calculated. 
-    \item[Cross validation] partition data into $k$ disjoint subsets of the same size. Hold aside one group for testing and use the rest to build model. The performance is evaluate based on the accuracy of $k$ models on test set. 
+    \item[Cross-validation] partition data into $k$ disjoint subsets of the same size. Hold aside one group for testing and use the rest to build model. The performance is evaluate based on the accuracy of $k$ models on test set. 
     \item[Leave-One-Out] k-fold cross-validation, with $k=n$
     \item[Bootstrap] similar to holdout, but sampling with replacement
 \end{description}

@@ -122,7 +122,7 @@ $$
 $$R(a_i|X) = \!\min_{k} R(a_k|X) = \!\max_i P(Y=y_i|X)$$
 
 \subsection{Reject or Doubt}
-In some applications, wrong decisions may have very high cost. Manual decision is required if the automatic system has low certainty of its decision For example, to use an optical digit recognizer to read postal codes on envelopes, wrongly recognizing the code causes the envelope to be sent to a wrong destination.
+In some applications, wrong decisions may have very high cost. Manual decision is required if the automatic system has low certainty of its decision. For example, to use an optical digit recognizer to read postal codes on envelopes, wrongly recognizing the code causes the envelope to be sent to a wrong destination.
 
 \subsection{Reject or Doubt Formulation}
 \noindent The new loss function, where $0 < r < 1$ is the loss incurred for choosing the reject action:
@@ -185,7 +185,7 @@ $$P(X|Y,Z) = P(X|Z)$$
 
 \noindent Assume that the features are conditionally independent given the class label, then the likelihood can be defined as:
 
-$$P(X_1, X_2, ..., X_d) = \prod_{i=1}^{d} P(X_{i}|Y = y_{k})$$
+$$P(X_1, X_2, ..., X_d|Y = y_{k}) = \prod_{i=1}^{d} P(X_{i}|Y = y_{k})$$
 
 \noindent As a result, the bayesian classifier can be rewritten as:
 

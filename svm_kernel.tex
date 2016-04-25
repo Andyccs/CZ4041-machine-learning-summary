@@ -33,5 +33,24 @@ $$k(\mathbf{x}_i,\mathbf{x}_j)=exp\Big(-\frac{\|\mathbf{x}_i - \mathbf{x}_j\|_2^
 \noindent Polynomial kernel:
 $$k(\mathbf{x}_i,\mathbf{x}_j)=(\mathbf{x}_i\cdot \mathbf{x}_j + 1)^d$$
 
+\section{Dual Form}
+
+\noindent Using Lagrangian Multiplier, we can transform the original optimization problem to dual form, where the mapping function $\varphi$ does no need to be computed explicitly during numeric optimization:
+
+$$\!\max_{\lambda} \Big( \sum_{i=1}^N \lambda_i - \frac{1}{2} \sum_{i,j} \lambda_i \lambda_j y_i y_j (\varphi(\mathbf{x}_i) \cdot \varphi(\mathbf{x}_j)  \Big)$$
+
+\noindent The decision boundary is given by:
+
+\begin{equation*}
+\begin{split}
+    \mathbf{w} \cdot \varphi(\mathbf{x}) + b &= 0\\
+    \sum_{i=1}^N \lambda_i y_i \varphi(\mathbf{x}_i) \cdot \varphi(\mathbf(x)) + b &= 0
+\end{split}
+\end{equation*}
+
+\noindent For a test instance $\mathbf{x}^*$, it can be classified using:
+
+$$f(\mathbf{x}^*)= \text{sign} \Bigg( \sum_{i=1}^N \lambda_i y_i \varphi(\mathbf{x}_i) \cdot \varphi(\mathbf(x)) + b \Bigg)$$
+
 
 \end{multicols*}
