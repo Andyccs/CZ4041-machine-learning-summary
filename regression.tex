@@ -31,7 +31,7 @@ $$\mathbf{w}^* = \arg\!\min_w E(\mathbf{w})$$
 \noindent To avoid overfitting, we add regularization term:
 $$E(\mathbf{w}) = \frac{1}{2} \sum_{i=1}^N ( f(\mathbf{x}) - y_i )^2 + \frac{\lambda}{2} \| \mathbf{w}\|_2^2$$
 
-The closed-form solution for $\mathbf{w}$ can be obtained by setting the derivative of $E(\mathbf{w})$ w.r.t. $\mathbf{w}$ to zero:
+\noindent The closed-form solution for $\mathbf{w}$ can be obtained by setting the derivative of $E(\mathbf{w})$ w.r.t. $\mathbf{w}$ to zero:
 $$\mathbf{w} = (\mathbf{X}^T \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^T \mathbf{y}$$
 
 \section{Linear Basis Function Models}

@@ -5,7 +5,7 @@
 
 \section{Histograms}
 
-\noindent Divide the sample space into a number of bins and approximate the density at the center of each bin by the fractiion of points in the training data that fall into the corresponding bin:
+\noindent Divide the sample space into a number of bins and approximate the density at the center of each bin by the fraction of points in the training data that fall into the corresponding bin:
 $$P_H(x) = \frac{1}{N} \frac{\text{number of } x^k \text{ in the same bin as x}}{\text{width of bin containing x}}$$
 \noindent where $x^k$ is one training sample and $N$ is the number of training sample. \\
 
@@ -18,7 +18,7 @@ $$\int P_H dx = \sum P_H(x_c) \times 2 = 1$$
 \noindent The probability that a vector x, drawn from a distribution p(x), will fall in a given region R of the same space is:
 $$P=\int_R p(u) du$$
 
-\noindent If random variable $X$ follow binomial distribution, we say $X ~ B(n, p)$, with $n$ trials and $p$ probability of success. The probability of getting $k$ success in $n$ trials is:
+\noindent If random variable $X$ follow binomial distribution, we say $X \sim B(n, p)$, with $n$ trials and $p$ probability of success. The probability of getting $k$ success in $n$ trials is:
 $$P(X=k) = \bigg( \begin{matrix} n \\ k \end{matrix}\bigg) p^k (1-p)^{n-k}$$
 $$\bigg( \begin{matrix} n \\ k \end{matrix}\bigg) = \frac{n!}{(n-k)!k!}$$
 
