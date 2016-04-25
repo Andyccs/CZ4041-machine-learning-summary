@@ -44,13 +44,13 @@ $$\!\max_{\lambda} \Big( \sum_{i=1}^N \lambda_i - \frac{1}{2} \sum_{i,j} \lambda
 \begin{equation*}
 \begin{split}
     \mathbf{w} \cdot \varphi(\mathbf{x}) + b &= 0\\
-    \sum_{i=1}^N \lambda_i y_i \varphi(\mathbf{x}_i) \cdot \varphi(\mathbf(x)) + b &= 0
+    \sum_{i=1}^N \lambda_i y_i \varphi(\mathbf{x}_i) \cdot \varphi(\mathbf{x}) + b &= 0
 \end{split}
 \end{equation*}
 
 \noindent For a test instance $\mathbf{x}^*$, it can be classified using:
 
-$$f(\mathbf{x}^*)= \text{sign} \Bigg( \sum_{i=1}^N \lambda_i y_i \varphi(\mathbf{x}_i) \cdot \varphi(\mathbf(x)) + b \Bigg)$$
+$$f(\mathbf{x}^*)= \text{sign} \Bigg( \sum_{i=1}^N \lambda_i y_i \varphi(\mathbf{x}_i) \cdot \varphi(\mathbf{x}^*) + b \Bigg)$$
 
 
 \end{multicols*}
